@@ -66,3 +66,49 @@ def print_text():
 
 decorated = decor(print_text)
 decorated()
+
+#Factorial
+def factorial(x):
+    if x == 1:
+        return 1
+    else: 
+        return x * factorial(x-1)
+
+print(factorial(5))
+
+def fib(x):
+  if x == 0 or x == 1:
+    return 1
+  else: 
+    return fib(x-1) + fib(x-2)
+print(fib(4))
+
+#Sets
+num_set = {1, 2, 3, 4, 5}
+word_set = set(["spam", "eggs", "sausage"])
+
+print(3 in num_set)
+print("spam" not in word_set)
+
+nums = {1, 2, 1, 3, 1, 4, 5, 6}
+print(nums)
+nums.add(-7)
+nums.remove(3)
+print(nums)
+
+first = {1, 2, 3, 4, 5, 6}
+second = {4, 5, 6, 7, 8, 9}
+
+print(first | second) # union operator
+print(first & second) # intersection operator
+print(first - second) # difference operator
+print(second - first) # difference operator
+print(first ^ second) # symmetric difference
+
+#intertools
+from itertools import count
+
+for i in count(3):
+    print(i)
+    if i >=11:
+        break

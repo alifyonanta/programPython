@@ -105,6 +105,20 @@ print(first - second) # difference operator
 print(second - first) # difference operator
 print(first ^ second) # symmetric difference
 
+#Decorators
+def decor(func):
+    def wrap():
+        print("============")
+        func()
+        print("============")
+    return wrap
+
+def print_text():
+    print("Hello world!")
+
+decorated = decor(print_text)
+decorated()
+
 #intertools
 from itertools import count
 
@@ -112,3 +126,15 @@ for i in count(3):
     print(i)
     if i >=11:
         break
+
+from itertools import accumulate, takewhile
+
+nums = list(accumulate(range(8)))
+print(nums)
+print(list(takewhile(lambda x: x<= 6, nums)))
+
+from itertools import product, permutations
+
+letters = ("A", "B")
+print(list(product(letters, range(5))))
+print(list(permutations(letters))) 

@@ -4,6 +4,4 @@ Python is a high-level programming language, with applications in numerous areas
 
 It is very popular and used by organizations such as Google, NASA, the CIA, and Disney.
 
-Visualize program execution
-
-https://cscircles.cemc.uwaterloo.ca/visualize#
+Visualize program execution : https://cscircles.cemc.uwaterloo.ca/visualize#

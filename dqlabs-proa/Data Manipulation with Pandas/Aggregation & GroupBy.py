@@ -37,3 +37,23 @@ print('Item terakhir pollutant (5 teratas):\n', pollutant_last.head())
 # Group berdasarkan country dan terapkan aggregasi: min, median, mean, max
 multiagg = pollutant.groupby('country').agg(['min','median','mean','max'])
 print('Multiple aggregations (5 teratas):\n', multiagg.head())
+
+# Create sebuah function: iqr
+def iqr(series):
+	Q1 = series.quantile(0.25)
+	Q3 = series.quantile(0.75)
+	return Q3-Q1
+# Group berdasarkan country dan terapkan aggregasi dari function: iqr
+custom_agg = pollutant.groupby('country').agg(iqr)
+print('Custom aggregation (5 teratas):\n', custom_agg.head())
+
+# Function IQR
+def iqr(series):
+	return series.quantile(0.75) - series.quantile(0.25)
+# Create custom aggregation using dict
+custom_agg_dict = pollutant['value'][['pm10','pm25','so2']].groupby('country').agg({
+   'pm10':'median',
+   'pm25':iqr,
+   'so2':iqr
+})
+print('\nCetak 5 data teratas custom_agg_dict:\n', custom_agg_dict.head())

@@ -58,3 +58,33 @@ plt.show()
 plt.figure()
 sns.boxplot(x=df_load['TotalCharges'])
 plt.show()
+
+#Mengatasi Outlier
+Q1 = (df_load[['tenure','MonthlyCharges','TotalCharges']]).quantile(0.25)
+Q3 = (df_load[['tenure','MonthlyCharges','TotalCharges']]).quantile(0.75)
+
+IQR = Q3-Q1
+maximum = Q3 + (1.5*IQR)
+print('Nilai Maximum dari masing-masing Variable adalah: ')
+print(maximum)
+minimum = Q1 - (1.5*IQR)
+print('\nNilai Minimum dari masing-masing Variable adalah: ')
+print(minimum)
+more_than = (df_load > maximum)
+lower_than = (df_load < minimum)
+df_load = df_load.mask(more_than, maximum, axis=1)
+df_load = df_load.mask(lower_than, minimum, axis=1)
+print('\nPersebaran data setelah ditangani Outlier: ')
+print(df_load[['tenure','MonthlyCharges','TotalCharges']].describe())
+
+#Loop Mendeteksi Nilai Tidak Starndar
+for col_name in list(['gender','SeniorCitizen','Partner','Dependents','PhoneService','MultipleLines','InternetService','OnlineSecurity','OnlineBackup','DeviceProtection','TechSupport','StreamingTV','StreamingMovies','Contract','PaperlessBilling','PaymentMethod','Churn']):
+  print('\nUnique Values Count \033[1m' + 'Before Standardized \033[0m Variable',col_name)
+  print(df_load[col_name].value_counts())
+	
+	df_load = df_load.replace(['Wanita','Laki-laki','Churn','Iya'],['Female','Male','Yes','Yes'])
+
+#Loop Menstandarisasi Variable Kategorik
+for col_name in list(['gender','Dependents','Churn']):
+	print('\nUnique Values Count \033[1m'+'After Standardized \033[0mVariable',col_name)
+	print(df_load[col_name].value_counts())

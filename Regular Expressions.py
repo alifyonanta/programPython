@@ -128,4 +128,58 @@ if re.match(pattern, "sausages"):
 
 if re.match(pattern, "ice--ice"):
     print("Match 4")
+    
+    pattern = r"9{1,3}$"
+
+if re.match(pattern, "99"):
+    print("Match 1")
+
+if re.match(pattern, "999"):
+    print("Match 2")
+
+if re.match(pattern, "9999"):
+    print("Match 3")
+    
+    pattern = r"egg(spam)*"
+
+if re.match(pattern, "egg"):
+    print("Match 1")
+
+if re.match(pattern, "eggspamspamspamegg"):
+    print("Match 2")
+
+if re.match(pattern, "spamspam"):
+    print("Match 3")
+
+#Groups
+pattern = r"a(bc)(de)(f(g)h)i"
+
+match = re.match(pattern, "abcdefghijklmnop")
+if match:
+    print(match.group())
+    print(match.group(0))
+    print(match.group(1))
+    print(match.group(2))
+    print(match.groups())
+    
+pattern = r"(?P<first>abc)(?:def)(ghi)"
+
+match = re.match(pattern, "abcdefghi")
+if match:
+    print(match.group("first"))
+    print(match.groups())
+
+pattern = r"gr(a|e)y"
+
+match = re.match(pattern, "gray")
+if match:
+    print ("Match 1")
+
+match = re.match(pattern, "grey")
+if match:
+    print ("Match 2")    
+
+match = re.match(pattern, "griy")
+if match:
+     print ("Match 3")    
 
